@@ -15,9 +15,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
 
-            val navController = rememberNavController()
 
             NotePad2Theme { //COMO SE ARMA LA NAVEGACION
+
+                val navController = rememberNavController()
                     NavHost(
                         navController = navController,
                         startDestination = "lista"
