@@ -27,7 +27,11 @@ import com.example.notepad2.ui.theme.NotePad2Theme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NuevaNota(navController: NavController, modifier: Modifier = Modifier) {
+fun NuevaNota(navController: NavController,
+              modifier: Modifier = Modifier,
+              onNuevaNota:(String, String)-> Unit
+
+) {
 
     Scaffold(
         modifier = modifier,
@@ -58,8 +62,7 @@ fun NuevaNota(navController: NavController, modifier: Modifier = Modifier) {
                     Text("Ingresar titulo")
                 },
                 onValueChange = {
-                    value ->
-                    titulo = value
+                    titulo = it
                 }
             )
 
@@ -71,14 +74,15 @@ fun NuevaNota(navController: NavController, modifier: Modifier = Modifier) {
                     Text("Ingresar nota")
                 },
                 onValueChange = {
-                        value ->
-                    texto = value
+                    texto = it
                 }
             )
 
             Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = {
+            Button(
+                onClick = {
                 navController.popBackStack()
+                onNuevaNota(titulo, texto)
             },
                 modifier = Modifier.align(Alignment.End),
                 ) {
@@ -93,6 +97,8 @@ fun NuevaNotaPreview() {
     NotePad2Theme {
         NuevaNota(
             rememberNavController()
-        )
+        ){
+            titulo, texto -> //lo dejo asi pq no esta haciendo nada, es para que no de error
+        }
     }
 }
